@@ -16,6 +16,9 @@ local function SafeRequest(url)
     elseif (delta and delta.request) then
         local r = delta.request({Url = url, Method = "GET"})
         response = r and r.Body
+    elseif (xeno and xeno.request) then
+        local r = xeno.request({Url = url, Method = "GET"})
+        response = r and r.Body
 
     elseif game and game.HttpGet then
         local ok, result = pcall(function()
