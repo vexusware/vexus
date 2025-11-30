@@ -1,14 +1,19 @@
 local games = {
-    [126244816328678] = "https://raw.githubusercontent.com/MajestySkie/DIG/refs/heads/main/DigDigDig.lua",
-    [129827112113663] = "https://raw.githubusercontent.com/MajestySkie/Prospecting/refs/heads/main/Prscting.lua",
-    [123921593837160] = "https://raw.githubusercontent.com/MajestySkie/Climb-And-Jump/refs/heads/main/Main.lua",
-    [102499196000712] = "https://raw.githubusercontent.com/MajestySkie/Climb-And-Jump/refs/heads/main/Main.lua",
-    [121864768012064] = "https://raw.githubusercontent.com/MajestySkie/Fish-It/refs/heads/main/Memancing.lua",
-    [97777561575736] = "https://raw.githubusercontent.com/MajestySkie/KayakRacing/refs/heads/main/Sigma.lua",
-    [86076978383613] = "https://raw.githubusercontent.com/MajestySkie/Zombie-Killer/refs/heads/main/Chx.lua",
-    [103754275310547] = "https://raw.githubusercontent.com/MajestySkie/Zombie-Killer/refs/heads/main/Chx.lua",
-    [134236244017051] = "https://raw.githubusercontent.com/MajestySkie/ClimbSlider/refs/heads/main/cas.lua",
-
+  [82321750197896] = "https://ziaanbase.github.io/games/Poop%20a%20Brainrot/main.lua", -- PoopABrainRot  
+  [113604074601559] = "https://ziaanbase.github.io/games/Build%20a%20Beehive/main.lua",  -- "Build a Beehive
+  [2753915549] = "https://ziaanbase.github.io/games/Blox%20Fruit/main.lua", -- Blox Fruit Sea 1
+  [4442272183] = "https://ziaanbase.github.io/games/Blox%20Fruit/main.lua", -- Blox Fruit Sea 2
+  [7449423635] = "https://ziaanbase.github.io/games/Blox%20Fruit/main.lua", -- Blox Fruit Sea 3  
+  [10324346056] = "https://ziaanbase.github.io/games/Evade/main.lua", -- evade Big Team
+  [9872472334] = "https://ziaanbase.github.io/games/Evade/main.lua", -- evade EVADE
+  [10662542523] = "https://ziaanbase.github.io/games/Evade/main.lua", -- evade Casual
+  [10324347967] = "https://ziaanbase.github.io/games/Evade/main.lua", -- evade Social Space
+  [121271605799901] = "https://ziaanbase.github.io/games/Evade/main.lua", -- evade Player Nextbots
+  [10808838353] = "https://ziaanbase.github.io/games/Evade/main.lua", -- evade VC Only
+  [11353528705] = "https://ziaanbase.github.io/games/Evade/main.lua",  -- evade Pro
+  [12334109280] = "https://ziaanbase.github.io/games/Guts%20and%20Blackpowder/main.lua", -- Guns & Black Powder
+  [14216737767] = "https://ziaanbase.github.io/games/Guts%20and%20Blackpowder/main.lua", -- Guns & Black Powder Mobile
+  [93978595733734] = "https://ziaanbase.github.io/games/Violence%20District/main.lua", -- Violence District 
 }
 
 local currentID = game.PlaceId
