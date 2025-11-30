@@ -1,21 +1,22 @@
-local games = {
-    [126244816328678] = "https://raw.githubusercontent.com/MajestySkie/DIG/refs/heads/main/DigDigDig.lua",
-    [129827112113663] = "https://raw.githubusercontent.com/MajestySkie/Prospecting/refs/heads/main/Prscting.lua",
-    [123921593837160] = "https://raw.githubusercontent.com/MajestySkie/Climb-And-Jump/refs/heads/main/Main.lua",
-    [102499196000712] = "https://raw.githubusercontent.com/MajestySkie/Climb-And-Jump/refs/heads/main/Main.lua",
-    [121864768012064] = "https://raw.githubusercontent.com/MajestySkie/Fish-It/refs/heads/main/Memancing.lua",
-    [97777561575736] = "https://raw.githubusercontent.com/MajestySkie/KayakRacing/refs/heads/main/Sigma.lua",
-    [86076978383613] = "https://raw.githubusercontent.com/MajestySkie/Zombie-Killer/refs/heads/main/Chx.lua",
-    [103754275310547] = "https://raw.githubusercontent.com/MajestySkie/Zombie-Killer/refs/heads/main/Chx.lua",
-    [134236244017051] = "https://raw.githubusercontent.com/MajestySkie/ClimbSlider/refs/heads/main/cas.lua",
-
-}
-
-local currentID = game.PlaceId
-local scriptURL = games[currentID]
-
-if scriptURL then
-    loadstring(game:HttpGet(scriptURL))()
-else
-    game.Players.LocalPlayer:Kick("Yo! This game ain't on the list.\nCheck the Discord for whitelisted games, homie.")
+local function SafeGet(url)
+    local ok, result = pcall(function()
+        return game:HttpGet(url)
+    end)
+    return ok and result or nil
 end
+
+-- Fuck
+local data = SafeGet("https://vexusware.github.io/src/vexus/vexusware.lua")
+if not data then return end
+
+local Games = loadstring(data)()
+
+-- You
+local URL = Games[game.PlaceId]
+if not URL then return end
+
+-- Skid, Your mama is Suck your dick
+local scriptContent = SafeGet(URL)
+if not scriptContent then return end
+
+loadstring(scriptContent)()
