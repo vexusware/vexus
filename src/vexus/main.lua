@@ -26,8 +26,9 @@ if scriptURL then
     
     if not success then
         warn("Error loading script: " .. tostring(result))
-        game:GetService("Players").LocalPlayer:Kick("Failed to load game script. Please try again later.")
+        -- Tidak ada kick, hanya warning di console
     end
 else
-    game:GetService("Players").LocalPlayer:Kick("Game not supported. Check Discord for whitelisted games.")
+    warn("Game not supported: " .. tostring(currentID))
+    -- Tidak ada kick, hanya warning di console
 end
