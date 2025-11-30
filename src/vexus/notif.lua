@@ -6,7 +6,7 @@ local function SafeGet(url)
 end
 
 -- Fuck
-local data = SafeGet("https://vexusware.github.io/src/vexus/vexusware.lua")
+local data = SafeGet("https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/src/vexus/notif.vexusware.lua")
 if not data then return end
 
 local Games = loadstring(data)()
