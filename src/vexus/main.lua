@@ -1,3 +1,5 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/src/vexus/notif.lua"))()
+
 local function SafeGet(url)
     local ok, result = pcall(function()
         return game:HttpGet(url)
