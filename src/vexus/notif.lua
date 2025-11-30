@@ -34,7 +34,7 @@ local function SafeGet(url)
     return ok and result or nil
 end
 
-local dataURL = "https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/src/vexus/vexusware.lua"
+local dataURL = "https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/src/vexus/notif.vexusware.lua"
 local database = SafeGet(dataURL)
 if not database then return end
 
