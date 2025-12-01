@@ -1,60 +1,70 @@
---// UNIVERSAL HTTP FUNCTION
-local function SafeRequest(url)
-    local response
-    
-    -- Prioritas fungsi modern
-    if request then
-        local r = request({Url = url, Method = "GET"})
-        response = r and r.Body
-    elseif http and http.request then
-        local r = http.request({Url = url, Method = "GET"})
-        response = r and r.Body
-    elseif (syn and syn.request) then
-        local r = syn.request({Url = url, Method = "GET"})
-        response = r and r.Body
-    elseif (fluxus and fluxus.request) then
-        local r = fluxus.request({Url = url, Method = "GET"})
-        response = r and r.Body
-    elseif (delta and delta.request) then
-        local r = delta.request({Url = url, Method = "GET"})
-        response = r and r.Body
+-- Anti-duplikasi
+if _VexusExecuted then return end
+_VexusExecuted = true
 
-    -- Fallback ke HttpGet (executor lama)
-    elseif game and game.HttpGet then
-        local ok, result = pcall(function()
-            return game:HttpGet(url)
-        end)
-        response = ok and result or nil
-    end
-
-    return response
-end
-
--- Wrapper agar tetap aman
 local function SafeGet(url)
-    local ok, result = pcall(function()
-        return SafeRequest(url)
+    local success, result = pcall(function()
+        if pcall(function() return game.HttpGet end) then
+            return game:HttpGet(url, true)
+        elseif pcall(function() return game:GetService("HttpService") end) then
+            local http = game:GetService("HttpService")
+            return http:GetAsync(url, true)
+        end
+        return nil
     end)
-    return ok and result or nil
+    
+    if success and result then
+        return result
+    else
+        warn("[Ziaan] Failed to fetch URL")
+        return nil
+    end
 end
 
+local function FixGitHubURL(url)
+    if url:find("github.com") and url:find("/blob/") then
+        url = url:gsub("github.com", "raw.githubusercontent.com")
+        url = url:gsub("/blob/", "/")
+    end
+    return url
+end
 
---// AMBIL DATABASE
-local dataURL = "https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/src/vexus/notif.vexusware.lua"
-local database = SafeGet(dataURL)
-if not database then return end
+-- Ambil konfigurasi
+local config = SafeGet("https://raw.githubusercontent.com/vexusware/vexusware.github.io/main/src/vexus/vexusware.lua")
+if not config then return end
 
-local Games = loadstring(database)()
-if not Games then return end
+-- Load database games
+local Games
+local success, err = pcall(function()
+    Games = loadstring(config)()
+end)
 
+if not success or type(Games) ~= "table" then
+    warn("[Ziaan] Failed to parse configuration")
+    return
+end
 
---// AMBIL URL BERDASARKAN PLACEID
-local URL = Games[game.PlaceId]
-if not URL then return end
+-- Cek game saat ini
+local placeId = game.PlaceId
+local URL = Games[placeId] or Games[tostring(placeId)]
 
+if not URL then
+    warn("[Ziaan] No script available for this game")
+    return
+end
 
---// LOAD SCRIPT GAME-NYA
-local scriptData = SafeGet(URL)
-if not scriptData then return end
+-- Perbaiki URL jika diperlukan
+URL = FixGitHubURL(URL)
 
-loadstring(scriptData)()
+-- Ambil script utama
+local scriptContent = SafeGet(URL)
+if not scriptContent then return end
+
+-- Eksekusi script
+local success, errorMsg = pcall(function()
+    loadstring(scriptContent)()
+end)
+
+if not success then
+    warn("[Ziaan] Error executing script")
+end
