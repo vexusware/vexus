@@ -1,4 +1,4 @@
-local Games = loadstring(game:HttpGet("https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/src/vexus/vexusware.lua"))()
+local Games = loadstring(game:HttpGet("https://vexusware.github.io/src/vexus/vexusware.lua"))()
 
 local URL = Games[game.GameId]
 
