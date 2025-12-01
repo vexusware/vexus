@@ -1,13 +1,19 @@
 local games = {
-    [126244816328678] = "https://raw.githubusercontent.com/MajestySkie/DIG/refs/heads/main/DigDigDig.lua",
-    [129827112113663] = "https://raw.githubusercontent.com/MajestySkie/Prospecting/refs/heads/main/Prscting.lua",
-    [123921593837160] = "https://raw.githubusercontent.com/MajestySkie/Climb-And-Jump/refs/heads/main/Main.lua",
-    [102499196000712] = "https://raw.githubusercontent.com/MajestySkie/Climb-And-Jump/refs/heads/main/Main.lua",
-    [121864768012064] = "https://raw.githubusercontent.com/MajestySkie/Fish-It/refs/heads/main/Memancing.lua",
-    [97777561575736] = "https://raw.githubusercontent.com/MajestySkie/KayakRacing/refs/heads/main/Sigma.lua",
-    [86076978383613] = "https://raw.githubusercontent.com/MajestySkie/Zombie-Killer/refs/heads/main/Chx.lua",
-    [103754275310547] = "https://raw.githubusercontent.com/MajestySkie/Zombie-Killer/refs/heads/main/Chx.lua",
-    [134236244017051] = "https://raw.githubusercontent.com/MajestySkie/ClimbSlider/refs/heads/main/cas.lua",
+    [82321750197896] = "https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/src/games/Poop%20a%20Brainrot/main.lua",
+    [113604074601559] = "https://github.com/vexusware/vexusware.github.io/blob/main/src/games/Build%20a%20Beehive/main.lua",
+    [2753915549] = "https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/src/games/Blox%20Fruit/main.lua",
+    [4442272183] = "https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/src/games/Blox%20Fruit/main.lua",
+    [7449423635] = "https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/src/games/Blox%20Fruit/main.lua",
+    [10324346056] = "https://raw.githubusercontent.com/vexusware/vexus/refs/heads/main/src/games/Evade/main.lua",
+    [9872472334] = "https://raw.githubusercontent.com/vexusware/vexus/refs/heads/main/src/games/Evade/main.lua",
+    [10662542523] = "https://raw.githubusercontent.com/vexusware/vexus/refs/heads/main/src/games/Evade/main.lua",
+    [10324347967] = "https://raw.githubusercontent.com/vexusware/vexus/refs/heads/main/src/games/Evade/main.lua",
+    [121271605799901] = "https://raw.githubusercontent.com/vexusware/vexus/refs/heads/main/src/games/Evade/main.lua",
+    [10808838353] = "https://raw.githubusercontent.com/vexusware/vexus/refs/heads/main/src/games/Evade/main.lua",
+    [11353528705] = "https://raw.githubusercontent.com/vexusware/vexus/refs/heads/main/src/games/Evade/main.lua",
+    [12334109280] = "https://raw.githubusercontent.com/vexusware/vexus/refs/heads/main/src/games/Guts%20and%20Blackpowder/main.lua",
+    [14216737767] = "https://raw.githubusercontent.com/vexusware/vexus/refs/heads/main/src/games/Guts%20and%20Blackpowder/main.lua",
+    [93978595733734] = "https://raw.githubusercontent.com/vexusware/vexus/refs/heads/main/src/games/Violence%20District/main.lua",
 
 }
 
