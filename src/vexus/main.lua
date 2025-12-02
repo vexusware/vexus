@@ -1,5 +1,3 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/src/vexus/notif.lua"))()
-
 if _VexusExecuted then return end
 _VexusExecuted = true
 
