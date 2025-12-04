@@ -1,408 +1,312 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZiaanVeil</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <header class="header">
-            <div class="logo-container">
-                <div class="logo-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <h1 class="logo-text">
-                    <span class="logo-primary">Ziaan</span><span class="logo-secondary">Veil</span>
-                </h1>
-                <div class="logo-subtitle">Advanced Lua/Luau Obfuscator for Roblox</div>
+        <header>
+            <div class="logo">
+                <h1><i class="fas fa-shield-alt"></i> ZiaanVeil</h1>
+                <p class="subtitle">Obfuscator Lua/Luau</p>
             </div>
-            
-            <div class="header-controls">
-                <button class="btn btn-secondary" id="toggle-theme">
-                    <i class="fas fa-moon"></i> Toggle Theme
-                </button>
-                <button class="btn btn-secondary" id="export-settings">
-                    <i class="fas fa-download"></i> Export Settings
-                </button>
-                <button class="btn btn-secondary" id="import-settings">
-                    <i class="fas fa-upload"></i> Import Settings
+            <div class="theme-toggle">
+                <button id="themeToggle">
+                    <i class="fas fa-moon"></i> Mode Gelap
                 </button>
             </div>
         </header>
-        
-        <main class="main-content">
-            <div class="editor-section">
-                <div class="section-header">
-                    <h2><i class="fas fa-code"></i> Input Lua/Luau Code</h2>
-                    <div class="section-controls">
-                        <button class="btn btn-small" id="load-example">
-                            <i class="fas fa-file-code"></i> Load Example
-                        </button>
-                        <button class="btn btn-small" id="clear-input">
-                            <i class="fas fa-trash"></i> Clear
-                        </button>
+
+        <main>
+            <div class="main-content">
+                <div class="input-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-code"></i> Kode Sumber</h2>
+                        <div class="actions">
+                            <button id="exampleBtn" class="btn-secondary">
+                                <i class="fas fa-file-code"></i> Contoh Kode
+                            </button>
+                            <button id="clearInputBtn" class="btn-secondary">
+                                <i class="fas fa-trash"></i> Hapus
+                            </button>
+                        </div>
+                    </div>
+                    <textarea id="sourceCode" placeholder="Tempel kode Lua/Luau Anda di sini...">-- Contoh kode Lua
+local player = game:GetService("Players").LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+function calculateDamage(base, multiplier)
+    local total = base * multiplier
+    if total > 100 then
+        return 100
+    else
+        return total
+    end
+end
+
+local damage = calculateDamage(10, 5)
+print("Damage inflicted: " .. damage)</textarea>
+                    <div class="input-footer">
+                        <div class="char-count">
+                            Karakter: <span id="charCount">0</span>
+                        </div>
+                        <div class="language-select">
+                            <label for="languageType">Target:</label>
+                            <select id="languageType">
+                                <option value="luau">Luau (Roblox)</option>
+                                <option value="lua">Lua 5.1</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="code-container">
-                    <div class="code-header">
-                        <div class="code-stats">
-                            <span id="input-lines">Lines: 0</span>
-                            <span id="input-chars">Chars: 0</span>
+
+                <div class="controls-section">
+                    <button id="obfuscateBtn" class="btn-primary">
+                        <i class="fas fa-magic"></i> Obfuscate Kode
+                    </button>
+                    <button id="copyBtn" class="btn-secondary" disabled>
+                        <i class="fas fa-copy"></i> Salin Output
+                    </button>
+                    <button id="downloadBtn" class="btn-secondary" disabled>
+                        <i class="fas fa-download"></i> Unduh
+                    </button>
+                    <button id="settingsToggle" class="btn-secondary">
+                        <i class="fas fa-cog"></i> Pengaturan
+                    </button>
+                </div>
+
+                <div class="output-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-lock"></i> Kode Terobfuscasi</h2>
+                        <div class="output-actions">
+                            <div class="obfuscation-level">
+                                <label for="obfLevel">Tingkat Obfuscasi:</label>
+                                <select id="obfLevel">
+                                    <option value="low">Rendah (Cepat)</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="high">Tinggi</option>
+                                    <option value="extreme">Ekstrem (Lambat)</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="code-language">Lua/Luau</div>
                     </div>
-                    <textarea id="input-code" class="code-editor" placeholder="Paste your Lua/Luau code here..."></textarea>
+                    <textarea id="outputCode" placeholder="Kode terobfuscasi akan muncul di sini..." readonly></textarea>
+                    <div class="output-footer">
+                        <div class="stats">
+                            <span id="obfuscationTime">Waktu: -</span>
+                            <span id="sizeIncrease">Ukuran: -</span>
+                            <span id="obfuscationLevel">Tingkat: -</span>
+                        </div>
+                        <div class="output-indicators">
+                            <div class="indicator" id="stringEncIndicator" title="String Encryption">
+                                <i class="fas fa-key"></i> String
+                            </div>
+                            <div class="indicator" id="controlFlowIndicator" title="Control Flow Flattening">
+                                <i class="fas fa-project-diagram"></i> Control Flow
+                            </div>
+                            <div class="indicator" id="renamingIndicator" title="Variable Renaming">
+                                <i class="fas fa-tag"></i> Renaming
+                            </div>
+                            <div class="indicator" id="bytecodeIndicator" title="Bytecode Generator">
+                                <i class="fas fa-microchip"></i> Bytecode
+                            </div>
+                            <div class="indicator" id="vmIndicator" title="VM Runner">
+                                <i class="fas fa-cogs"></i> VM
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="controls-section">
-                <div class="obfuscate-controls">
-                    <button class="btn btn-primary btn-large" id="obfuscate-btn">
-                        <i class="fas fa-lock"></i> Obfuscate Code
-                    </button>
-                    <button class="btn btn-success btn-large" id="copy-output">
-                        <i class="fas fa-copy"></i> Copy Obfuscated
-                    </button>
-                    <button class="btn btn-danger btn-large" id="test-obfuscated">
-                        <i class="fas fa-vial"></i> Test in Roblox
+
+            <div class="sidebar" id="settingsPanel">
+                <div class="sidebar-header">
+                    <h3><i class="fas fa-sliders-h"></i> Pengaturan Obfuscasi</h3>
+                    <button id="closeSettings" class="btn-icon">
+                        <i class="fas fa-times"></i>
                     </button>
                 </div>
                 
-                <div class="obfuscation-progress">
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress-fill"></div>
+                <div class="settings-group">
+                    <h4><i class="fas fa-lock"></i> Enkripsi String</h4>
+                    <div class="setting">
+                        <label class="switch">
+                            <input type="checkbox" id="enableStringEnc" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span class="setting-label">Aktifkan String Encryption</span>
                     </div>
-                    <div class="progress-text" id="progress-text">Ready to obfuscate</div>
-                </div>
-            </div>
-            
-            <div class="editor-section">
-                <div class="section-header">
-                    <h2><i class="fas fa-lock"></i> Obfuscated Output</h2>
-                    <div class="section-controls">
-                        <button class="btn btn-small" id="download-output">
-                            <i class="fas fa-download"></i> Download
-                        </button>
-                        <button class="btn btn-small" id="minify-output">
-                            <i class="fas fa-compress-alt"></i> Minify
-                        </button>
+                    <div class="setting">
+                        <label class="switch">
+                            <input type="checkbox" id="enableXOR" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span class="setting-label">Gunakan XOR Encryption</span>
                     </div>
-                </div>
-                <div class="code-container">
-                    <div class="code-header">
-                        <div class="code-stats">
-                            <span id="output-lines">Lines: 0</span>
-                            <span id="output-chars">Chars: 0</span>
-                            <span id="obfuscation-level">Obfuscation: 0%</span>
-                        </div>
-                        <div class="code-language">Obfuscated Lua</div>
+                    <div class="setting">
+                        <label class="switch">
+                            <input type="checkbox" id="enableBase64">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="setting-label">Gunakan Base64 Encoding</span>
                     </div>
-                    <textarea id="output-code" class="code-editor" readonly placeholder="Obfuscated code will appear here..."></textarea>
-                </div>
-            </div>
-            
-            <div class="settings-section">
-                <div class="section-header">
-                    <h2><i class="fas fa-sliders-h"></i> Obfuscation Settings</h2>
-                    <div class="section-controls">
-                        <button class="btn btn-small" id="preset-low">
-                            <i class="fas fa-battery-quarter"></i> Low
-                        </button>
-                        <button class="btn btn-small" id="preset-medium">
-                            <i class="fas fa-battery-half"></i> Medium
-                        </button>
-                        <button class="btn btn-small" id="preset-high">
-                            <i class="fas fa-battery-full"></i> High
-                        </button>
-                        <button class="btn btn-small" id="preset-maximum">
-                            <i class="fas fa-skull-crossbones"></i> Maximum
-                        </button>
+                    <div class="setting">
+                        <label for="xorKey">Kunci XOR:</label>
+                        <input type="text" id="xorKey" value="0x5A" placeholder="Hex key (0x...)">
                     </div>
                 </div>
-                
-                <div class="settings-grid">
-                    <!-- String Encryption Settings -->
-                    <div class="setting-group">
-                        <h3><i class="fas fa-key"></i> String Encryption</h3>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="string-encryption-enabled" checked>
-                                Enable String Encryption
-                            </label>
-                        </div>
-                        <div class="setting">
-                            <label>Encryption Method</label>
-                            <select id="string-encryption-method">
-                                <option value="xor">XOR Encryption</option>
-                                <option value="aes">AES-like (Custom)</option>
-                                <option value="base64">Base64 + XOR</option>
-                                <option value="rotating">Rotating Key</option>
-                            </select>
-                        </div>
-                        <div class="setting">
-                            <label>Encryption Key</label>
-                            <input type="text" id="string-encryption-key" value="ZiaanVeilSecureKey2023" placeholder="Custom encryption key">
-                        </div>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="string-split-enabled" checked>
-                                Split Encrypted Strings
-                            </label>
-                        </div>
+
+                <div class="settings-group">
+                    <h4><i class="fas fa-code"></i> Constant Encoding</h4>
+                    <div class="setting">
+                        <label class="switch">
+                            <input type="checkbox" id="enableConstantEnc" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span class="setting-label">Encode Constants</span>
                     </div>
-                    
-                    <!-- Constant Encoding Settings -->
-                    <div class="setting-group">
-                        <h3><i class="fas fa-hashtag"></i> Constant Encoding</h3>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="constant-encoding-enabled" checked>
-                                Enable Constant Encoding
-                            </label>
-                        </div>
-                        <div class="setting">
-                            <label>Number Encoding</label>
-                            <select id="constant-encoding-method">
-                                <option value="arithmetic">Arithmetic Obfuscation</option>
-                                <option value="hex">Hexadecimal Encoding</option>
-                                <option value="bitwise">Bitwise Operations</option>
-                                <option value="polynomial">Polynomial Encoding</option>
-                            </select>
-                        </div>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="constant-float-enabled">
-                                Encode Float Numbers
-                            </label>
-                        </div>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="constant-bool-enabled" checked>
-                                Encode Boolean Values
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <!-- Control Flow Settings -->
-                    <div class="setting-group">
-                        <h3><i class="fas fa-project-diagram"></i> Control Flow Obfuscation</h3>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="control-flow-enabled" checked>
-                                Enable Control Flow Flattening
-                            </label>
-                        </div>
-                        <div class="setting">
-                            <label>Flattening Intensity</label>
-                            <select id="control-flow-intensity">
-                                <option value="low">Low</option>
-                                <option value="medium" selected>Medium</option>
-                                <option value="high">High</option>
-                                <option value="extreme">Extreme</option>
-                            </select>
-                        </div>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="control-flow-junk" checked>
-                                Insert Junk Code
-                            </label>
-                        </div>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="control-flow-fake" checked>
-                                Insert Fake Conditions
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <!-- Variable Renaming Settings -->
-                    <div class="setting-group">
-                        <h3><i class="fas fa-i-cursor"></i> Variable/Function Renaming</h3>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="renaming-enabled" checked>
-                                Enable Renaming
-                            </label>
-                        </div>
-                        <div class="setting">
-                            <label>Renaming Style</label>
-                            <select id="renaming-style">
-                                <option value="javanese">Javanese Script</option>
-                                <option value="chinese">Chinese Characters</option>
-                                <option value="arabic">Arabic Script</option>
-                                <option value="unicode">Mixed Unicode</option>
-                                <option value="emoji">Emoji + Symbols</option>
-                            </select>
-                        </div>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="renaming-preserve" checked>
-                                Preserve Roblox API
-                            </label>
-                        </div>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="renaming-minify">
-                                Minify Names (a, b, c...)
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <!-- Bytecode & VM Settings -->
-                    <div class="setting-group">
-                        <h3><i class="fas fa-microchip"></i> Bytecode & VM</h3>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="bytecode-enabled">
-                                Enable Custom Bytecode
-                            </label>
-                        </div>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="interpreter-enabled">
-                                Enable Custom Interpreter (VM)
-                            </label>
-                        </div>
-                        <div class="setting">
-                            <label>Bytecode Complexity</label>
-                            <select id="bytecode-complexity">
-                                <option value="simple">Simple</option>
-                                <option value="medium">Medium</option>
-                                <option value="complex">Complex</option>
-                            </select>
-                        </div>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="bytecode-encrypt">
-                                Encrypt Bytecode
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <!-- Additional Obfuscation Settings -->
-                    <div class="setting-group">
-                        <h3><i class="fas fa-plus-circle"></i> Additional Obfuscation</h3>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="anti-tamper-enabled">
-                                Anti-Tamper Protection
-                            </label>
-                        </div>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="metadata-obfuscation" checked>
-                                Obfuscate Metadata
-                            </label>
-                        </div>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="insert-comments">
-                                Insert Bogus Comments
-                            </label>
-                        </div>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="randomize-whitespace">
-                                Randomize Whitespace
-                            </label>
-                        </div>
+                    <div class="setting">
+                        <label for="constantMethod">Metode:</label>
+                        <select id="constantMethod">
+                            <option value="arithmetic">Ekspresi Aritmatika</option>
+                            <option value="hex">Hexadecimal</option>
+                            <option value="binary">Binary Operations</option>
+                        </select>
                     </div>
                 </div>
-                
-                <div class="advanced-settings">
-                    <h3><i class="fas fa-cogs"></i> Advanced Settings</h3>
-                    <div class="advanced-grid">
-                        <div class="setting">
-                            <label>Obfuscation Iterations</label>
-                            <input type="range" id="obfuscation-iterations" min="1" max="5" value="2">
-                            <span id="iterations-value">2</span>
-                        </div>
-                        <div class="setting">
-                            <label>Random Seed</label>
-                            <input type="text" id="random-seed" value="ZiaanVeil" placeholder="Custom random seed">
-                        </div>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="preserve-line-info">
-                                Preserve Line Numbers (Debugging)
-                            </label>
-                        </div>
-                        <div class="setting">
-                            <label>
-                                <input type="checkbox" id="compress-output">
-                                Compress Output Code
-                            </label>
-                        </div>
+
+                <div class="settings-group">
+                    <h4><i class="fas fa-random"></i> Control Flow Flattening</h4>
+                    <div class="setting">
+                        <label class="switch">
+                            <input type="checkbox" id="enableControlFlow" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span class="setting-label">Aktifkan Control Flow Flattening</span>
                     </div>
+                    <div class="setting">
+                        <label for="cfComplexity">Tingkat Kompleksitas:</label>
+                        <select id="cfComplexity">
+                            <option value="low">Rendah</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">Tinggi</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h4><i class="fas fa-font"></i> Renaming Variable/Fungsi</h4>
+                    <div class="setting">
+                        <label class="switch">
+                            <input type="checkbox" id="enableRenaming" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span class="setting-label">Aktifkan Renaming</span>
+                    </div>
+                    <div class="setting">
+                        <label for="renameType">Jenis Karakter:</label>
+                        <select id="renameType">
+                            <option value="jawa">Aksara Jawa</option>
+                            <option value="arab">Arab</option>
+                            <option value="chinese">Cina (Unicode)</option>
+                            <option value="emoji">Emoji</option>
+                            <option value="mixed" selected>Campuran</option>
+                        </select>
+                    </div>
+                    <div class="setting">
+                        <label class="switch">
+                            <input type="checkbox" id="renameObfuscate" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span class="setting-label">Obfuscate Nama Fungsi Built-in</span>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h4><i class="fas fa-microchip"></i> Bytecode & VM</h4>
+                    <div class="setting">
+                        <label class="switch">
+                            <input type="checkbox" id="enableBytecode">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="setting-label">Generate Bytecode Custom</span>
+                    </div>
+                    <div class="setting">
+                        <label class="switch">
+                            <input type="checkbox" id="enableVM">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="setting-label">Aktifkan VM Runner</span>
+                    </div>
+                    <div class="setting">
+                        <label for="vmComplexity">Kompleksitas VM:</label>
+                        <select id="vmComplexity">
+                            <option value="simple">Sederhana</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="complex">Kompleks</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h4><i class="fas fa-cogs"></i> Pengaturan Tambahan</h4>
+                    <div class="setting">
+                        <label class="switch">
+                            <input type="checkbox" id="enableDeadCode">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="setting-label">Tambahkan Dead Code</span>
+                    </div>
+                    <div class="setting">
+                        <label class="switch">
+                            <input type="checkbox" id="enableDebugProtection">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="setting-label">Protection Anti-Debug</span>
+                    </div>
+                    <div class="setting">
+                        <label class="switch">
+                            <input type="checkbox" id="enableSelfDefending">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="setting-label">Self-Defending Code</span>
+                    </div>
+                </div>
+
+                <div class="settings-footer">
+                    <button id="resetSettings" class="btn-secondary">
+                        <i class="fas fa-undo"></i> Reset ke Default
+                    </button>
+                    <button id="saveSettings" class="btn-primary">
+                        <i class="fas fa-save"></i> Simpan Pengaturan
+                    </button>
                 </div>
             </div>
         </main>
-        
-        <footer class="footer">
-            <div class="footer-info">
-                <p><i class="fas fa-code-branch"></i> ZiaanVeil Obfuscator v1.0.0 | For Roblox Lua/Luau</p>
-                <p class="footer-warning">
-                    <i class="fas fa-exclamation-triangle"></i> 
-                    This tool is for educational purposes only. Use responsibly.
-                </p>
-            </div>
+
+        <footer>
+            <p>ZiaanVeil v1.0 - Obfuscator Lua/Luau untuk Roblox | Dibuat dengan <i class="fas fa-heart"></i> untuk keamanan kode</p>
             <div class="footer-links">
-                <a href="#" id="github-link"><i class="fab fa-github"></i> GitHub</a>
-                <a href="#" id="docs-link"><i class="fas fa-book"></i> Documentation</a>
-                <a href="#" id="issues-link"><i class="fas fa-bug"></i> Report Issues</a>
+                <a href="#"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#"><i class="fas fa-question-circle"></i> Dokumentasi</a>
+                <a href="#"><i class="fas fa-bug"></i> Laporkan Bug</a>
             </div>
         </footer>
     </div>
 
-    <!-- Modal for testing in Roblox -->
-    <div class="modal" id="test-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3><i class="fas fa-vial"></i> Test Obfuscated Code in Roblox</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>To test your obfuscated code in Roblox:</p>
-                <ol>
-                    <li>Copy the obfuscated code from the output field</li>
-                    <li>Open Roblox Studio and create a new Script in Workspace</li>
-                    <li>Paste the obfuscated code into the script</li>
-                    <li>Run the game to test if it works correctly</li>
-                </ol>
-                <p class="modal-warning">
-                    <i class="fas fa-exclamation-circle"></i>
-                    Some obfuscation methods may cause performance issues. Test thoroughly before production use.
-                </p>
-                <div class="modal-code">
-                    <pre id="test-script-template">-- Paste this into a Roblox Script
-local function ZV_Decrypt(str, key)
-    -- Decryption function will be generated based on settings
-    return string.reverse(str) -- Example decryption
-end
-
--- Your obfuscated code will be inserted here</pre>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary modal-close-btn">Close</button>
-                <button class="btn btn-primary" id="copy-test-template">Copy Test Template</button>
-            </div>
-        </div>
-    </div>
+    <div id="toast" class="toast"></div>
 
     <script src="script.js"></script>
     <script src="obfuscator/core.js"></script>
-    <script src="obfuscator/utils.js"></script>
     <script src="obfuscator/string-encryption.js"></script>
     <script src="obfuscator/constant-encoding.js"></script>
     <script src="obfuscator/control-flow.js"></script>
     <script src="obfuscator/renaming.js"></script>
     <script src="obfuscator/bytecode.js"></script>
-    <script src="obfuscator/interpreter.js"></script>
-    <script src="obfuscator/xor.js"></script>
+    <script src="obfuscator/vm-runner.js"></script>
 </body>
 </html>
