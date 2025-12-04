@@ -259,6 +259,9 @@ end`;
         const securityLevels = ['Rendah', 'Sedang', 'Tinggi'];
         securityLevel.textContent = securityLevels[stats.securityLevel - 1] || '-';
         securityLevel.style.color = stats.securityLevel === 3 ? '#2ecc71' : stats.securityLevel === 2 ? '#f1c40f' : '#e74c3c';
+
+        if (stats.junkPercentage) {
+        securityLevel.textContent += ` (${stats.junkPercentage}% junk)`;
     }
     
     // Reset stats
