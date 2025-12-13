@@ -1,0 +1,18 @@
+{
+  "name": "vexusware-scripts",
+  "version": "1.0.0",
+  "description": "Vexusware game scripts repository",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "keywords": ["roblox", "scripts", "games"],
+  "author": "vexusware",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {}
+}
