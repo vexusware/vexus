@@ -1,3 +1,5 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/src/notify/main.lua"))()
+
 -- Anti-duplikasi
 if _VexusExecuted then return end
 _VexusExecuted = true
