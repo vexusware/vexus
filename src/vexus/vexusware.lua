@@ -14,6 +14,10 @@ local Games = {
     [12334109280] = "https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/src/games/Guts%20and%20Blackpowder/main.lua",
     [14216737767] = "https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/src/games/Guts%20and%20Blackpowder/main.lua",
     [93978595733734] = "https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/src/games/Violence%20District/main.lua",
+    
+    [137826330724902] = "https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/src/games/Guts%20and%20Blackpowder/main.lua",
+    [128001665358186] = "https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/src/games/Violence%20District/main.lua",
+
 }
 
 return Games
